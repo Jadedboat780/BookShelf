@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+:root {
+    --btn-color: rgba(100, 66, 69, 1);
+
+    background-color: white;
+}

@@ -1,0 +1,21 @@
+services:
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:17-alpine
+    restart: always
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./migrations/20250313064301_init.up.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
+    driver: local
